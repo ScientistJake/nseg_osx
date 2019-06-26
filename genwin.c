@@ -53,12 +53,12 @@ struct strlist
 
 #define TESTMAX 1000
 void *tmalloc();
-int record_ptrs[TESTMAX] = {0,0,0,0};
+unsigned long long record_ptrs[TESTMAX] = {0,0,0,0};
 int rptr = 0;
 
 /*------------------------------------------------------------(genwininit)---*/
 
-genwininit()
+void genwininit()
 
 {
 	char	*cp, *cp0;
@@ -141,7 +141,7 @@ int blastdb(name)
 
 /*------------------------------------------------------------(closedbase)---*/
 
-extern closedbase(dbase)
+extern void closedbase(dbase)
   struct Database *dbase;
 
   {
@@ -182,7 +182,7 @@ extern struct Sequence *nextseq(dbase)
 
 /*--------------------------------------------------------------(closeseq)---*/
 
-extern closeseq(seq)
+extern void closeseq(seq)
   struct Sequence *seq;
 
   {
@@ -316,7 +316,7 @@ extern int shiftwin1(win)
 
 /*--------------------------------------------------------------(closewin)---*/
 
-extern closewin(win)
+extern void closewin(win)
   struct Sequence *win;
 
   {
@@ -333,7 +333,7 @@ extern closewin(win)
 
 /*----------------------------------------------------------------(compon)---*/
 
-extern compon(win)
+extern void compon(win)
 	struct Sequence	*win;
 {
 	register int	*comp;
@@ -361,7 +361,7 @@ static int state_cmp(s1, s2)
 	return *s2 - *s1;
 }
 
-extern stateon(win)
+extern void stateon(win)
 	struct Sequence	*win;
 {
 	register int	aa, nel, c;
@@ -386,7 +386,7 @@ extern stateon(win)
 
 /*-----------------------------------------------------------------(enton)---*/
 
-extern enton(win)
+extern void enton(win)
   struct Sequence *win;
 
   {
@@ -689,7 +689,7 @@ skipline(fp)
    while ((c=getc(fp))!='\n' && c!=EOF)
      ;
 
-   return;
+   return FALSE;
   }
 
 /*--------------------------------------------------------------(findchar)---*/
@@ -788,7 +788,7 @@ EndLoop:
 
 	seq->length = strlen(seq->seq);
 
-	return;
+	return FALSE;
 }
 /*-----------------------------------------------------------------(upper)---*/
 
@@ -852,7 +852,7 @@ void *tmalloc(size)
       exit(2);
      }
 
-   record_ptrs[rptr] = (int) ptr;
+   record_ptrs[rptr] = (unsigned long long) ptr;
    rptr++;
 
    return(ptr);
@@ -867,7 +867,7 @@ tfree(ptr)
 
    for (i=0; i<rptr; i++)
      {
-      if (record_ptrs[i]==(int)ptr)
+      if (record_ptrs[i]==(unsigned long long)ptr)
         {
          record_ptrs[i] = 0;
          break;

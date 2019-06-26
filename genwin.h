@@ -147,15 +147,15 @@ struct PerScoreVec
 /*----------------------------------------------------------------(protos)---*/
 
 extern struct Database *opendbase();
-extern closedbase();
+extern void closedbase();
 
 extern struct Sequence *openseq(), *firstseq(), *nextseq();
-extern closeseq();
+extern void closeseq();
 
 extern struct Sequence *openwin(), *nextwin();
-extern shiftwin(), closewin();
+extern void shiftwin(), closewin();
 
-extern compon(), stateon(), enton();
+extern void compon(), stateon(), enton();
 extern double entropy();
 
 extern struct Matrix *openmat();

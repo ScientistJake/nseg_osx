@@ -184,7 +184,7 @@ getparams(argc, argv)
    downset = (window+1)/2 - 1;
    upset = window - downset;
 
-   if (i==argc) return;
+   if (i==argc) return FALSE;
 
    nargc = argc-i+1;
    nargv = argv+(i-1);
@@ -252,7 +252,7 @@ getparams(argc, argv)
         }
      }   
 
-   return;
+   return FALSE;
   }
 
 /*----------------------------------------------------------------(segseq)---*/
@@ -270,7 +270,7 @@ segseq(seq, segs, offset)
    double *H, *seqent();
 
    H = seqent(seq);
-   if (H==NULL) return;
+   if (H==NULL) return FALSE;
 
    first = downset;
    last = seq->length - upset;
@@ -327,7 +327,7 @@ segseq(seq, segs, offset)
      }
 
    free(H);
-   return;
+   return FALSE;
   }
 
 /*----------------------------------------------------------------(seqent)---*/
@@ -476,7 +476,7 @@ trim(seq, leftend, rightend)
 /*   fprintf(stderr, "%d-%d\n", *leftend, *rightend);              /*-*/
 
    closewin(seq);
-   return;
+   return FALSE;
   }
 
 /*---------------------------------------------------------------(getprob)---*/
@@ -568,8 +568,8 @@ mergesegs(seq, segs)
   {struct Segment *seg, *nextseg;
    int len;
 
-   if (overlaps) return;
-   if (segs==NULL) return;
+   if (overlaps) return FALSE;
+   if (segs==NULL) return FALSE;
 
    if (segs->begin<hilenmin) segs->begin = 0;
 
@@ -609,7 +609,7 @@ mergesegs(seq, segs)
    len = seq->length - seg->end - 1;
    if (len<hilenmin) seg->end = seq->length - 1;
 
-   return;
+   return FALSE;
   }
 
 /*---------------------------------------------------------(per_mergesegs)---*/
@@ -715,7 +715,7 @@ per_seqprep(seq, persegs)
         }
      }
 
-   return;
+   return FALSE;
   }
 
 /*----------------------------------------------------------------(report)---*/
@@ -734,7 +734,7 @@ report(seq, segs)
       enton(seq);
       seqout(seq, hi, 1, seq->length);
 /*    fputc('\n', stdout);   -- for spacing after each sequence */
-      return;
+      return FALSE;
      }
 
    if (segs->begin>0)
@@ -779,7 +779,7 @@ report(seq, segs)
    if (seg->end+1==seq->length)
      {
 /*    fputc('\n', stdout);   -- for spacing after each sequence */
-      return;
+      return FALSE;
      }
 
    subseq = openwin(seq, seg->end+1, seq->length-seg->end-1);
@@ -788,7 +788,7 @@ report(seq, segs)
    closewin(subseq);
 
 /* fputc('\n', stdout);   -- for spacing after each sequence */
-   return;
+   return FALSE;
   }
 
 /*------------------------------------------------------------(singreport)---*/
@@ -1174,8 +1174,8 @@ seqout(seq, hilo, begin, end)
    static int lo = 0;
    int i, ctr, iend;
 
-   if (hionly && hilo==lo) return;
-   if (loonly && hilo==hi) return;
+   if (hionly && hilo==lo) return FALSE;
+   if (loonly && hilo==hi) return FALSE;
 
    proseq = seq->seq;
    proseqmax = proseq + seq->length;
@@ -1253,7 +1253,7 @@ appendseg(segs, seg)
         }
      }
 
-   return;
+   return FALSE;
   }
 
 /*--------------------------------------------------------------(freesegs)---*/
