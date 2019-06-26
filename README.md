@@ -5,7 +5,7 @@ Try this version.
 
 I edited `genwin.c`, `nseg.c`,and `genwin.h` to add either a `void` keyword at the start of the functions throwing the errors or I added that they `return FALSE;`.  
 
-RepeatScout and thus RepeatModeler seem to work. But when I run nseg on it's own I get a bus error ¯\_(ツ)_/¯
+RepeatScout and thus RepeatModeler seem to work. But when I run nseg on it's own I get a bus error ¯\\_(ツ)_/¯
 
 ## Disclaimer:  
 I don't know shit about C. This was hacked together from [Repeat Modeler issue 32](https://github.com/rmhubley/RepeatModeler/issues/32). 
