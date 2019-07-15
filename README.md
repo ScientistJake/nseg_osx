@@ -1,3 +1,7 @@
+# Deprecated.  
+## Please use this version which compiles without errors or warnings:  
+https://github.com/jebrosen/nseg
+
 # nseg_osx
 nseg doesn't compile on mac OSX making it impossible to run RepeatModeler
 
